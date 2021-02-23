@@ -1,3 +1,4 @@
+// The current version of this code works only with one  HC-SR04
 // Include NewPing Library for better calculations using the HC-SR04 sensor
 #include "NewPing.h"
 
