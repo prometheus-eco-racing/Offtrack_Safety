@@ -12,7 +12,7 @@ float BPM;
 int i =0;
 void setup()
 {
-  Serial.begin(19200);
+  Serial.begin(9600);
   Serial.println("Initializing...");
 
   // Initialize sensor
