@@ -1,9 +1,14 @@
 from influxdb import InfluxDBClient
 import time
 import serial
+import numpy as np
+import matplotlib.pyplot as plt
+i = 2
+x = np.arange(0,1,1)
+y = [0]
 c = 1
 time.sleep(5)
-ar = serial.Serial('COM3',9600,timeout=1)
+ar = serial.Serial('COM5',9600,timeout=1)
 client = InfluxDBClient(host='localhost', port=8086)
 client.create_database('pydb')
 client.switch_database('pydb')
@@ -32,3 +37,15 @@ while 1:
         }
     ]
     client.write_points(json_body)
+    if(i<7):
+        x = np.arange(0,i,1)
+        y.append(float(data[4:].decode('utf-8')))
+        plt.plot(x,y)
+        plt.pause(0.5)
+    else:
+        plt.clf()
+        x = np.arange(i-5,i,1)
+        y.append(float(data[4:].decode('utf-8')))
+        plt.plot(x,y[i-5:])
+        plt.pause(0.5)
+    i+=1
