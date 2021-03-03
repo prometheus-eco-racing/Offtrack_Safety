@@ -3,6 +3,11 @@ import time
 import serial
 import numpy as np
 import matplotlib.pyplot as plt
+f1 = False
+lc = input("Run a buckup plot(Y/N)?")
+
+if(lc =="Y"):
+    f1 = True
 i = 2
 x = np.arange(0,1,1)
 y = [0]
@@ -37,15 +42,17 @@ while 1:
         }
     ]
     client.write_points(json_body)
-    if(i<7):
-        x = np.arange(0,i,1)
-        y.append(float(data[4:].decode('utf-8')))
-        plt.plot(x,y)
-        plt.pause(0.5)
-    else:
-        plt.clf()
-        x = np.arange(i-5,i,1)
-        y.append(float(data[4:].decode('utf-8')))
-        plt.plot(x,y[i-5:])
-        plt.pause(0.5)
-    i+=1
+    if(f1):
+        if(i<7):
+            x = np.arange(0,i,1)
+            y.append(float(data[4:].decode('utf-8')))
+            plt.plot(x,y)
+            plt.pause(0.5)
+        else:
+            plt.clf()
+            x = np.arange(i-5,i,1)
+            y.append(float(data[4:].decode('utf-8')))
+            plt.plot(x,y[i-5:])
+            plt.pause(0.5)
+        i+=1
+
